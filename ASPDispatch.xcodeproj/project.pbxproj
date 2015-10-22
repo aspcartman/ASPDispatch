@@ -1,0 +1,462 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		52FAD85747C4EC6937E66E30 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 202AF6C4BF94E960D168FEC3 /* libPods-Tests.a */; };
+		58145CC21BD69A19009C26DE /* PromiseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58145CC11BD69A19009C26DE /* PromiseTests.m */; };
+		58145CC41BD69A19009C26DE /* libASPDispatch-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58145CB21BD699DD009C26DE /* libASPDispatch-osx.a */; settings = {ASSET_TAGS = (); }; };
+		BE21316B44FBEAA6D452A4A8 /* ASPFuture.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21389BE18F5AFCDC684B31 /* ASPFuture.m */; };
+		BE2131FC8D80CF465D86D189 /* ASPPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = BE213F2DC99AB50FA0EBF25D /* ASPPromise.m */; };
+		BE213211883BA5266871C324 /* FutureTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE213431580FFC4E975B63DC /* FutureTests.m */; };
+		BE21341E873897383E8CB262 /* ASPDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = BE213F59D2D47713A638887E /* ASPDispatch.m */; };
+		BE213A239375339502A970FF /* ASPFuture.h in Headers */ = {isa = PBXBuildFile; fileRef = BE213E9A93EF7AF060B6D665 /* ASPFuture.h */; };
+		BE213D9105E2305C14CA7D9D /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BE213D44C3A82704CA5F64DA /* Common.m */; };
+		BE213F006EB807495016C1F0 /* ASPPromise.h in Headers */ = {isa = PBXBuildFile; fileRef = BE213C35FB9DF93F2926275A /* ASPPromise.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		58145CC51BD69A19009C26DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE213F0BA27169CD59886ABB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 58145CB11BD699DD009C26DE;
+			remoteInfo = "ASPObjectyFuture-osx";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		202AF6C4BF94E960D168FEC3 /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		58145CB21BD699DD009C26DE /* libASPDispatch-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libASPDispatch-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		58145CBF1BD69A19009C26DE /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		58145CC11BD69A19009C26DE /* PromiseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PromiseTests.m; sourceTree = "<group>"; };
+		58145CC31BD69A19009C26DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE213431580FFC4E975B63DC /* FutureTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FutureTests.m; sourceTree = "<group>"; };
+		BE213695EEEEA27CD189FD54 /* DispatchTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchTests.m; sourceTree = "<group>"; };
+		BE21389BE18F5AFCDC684B31 /* ASPFuture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASPFuture.m; sourceTree = "<group>"; };
+		BE2139CB97281A0747FD781E /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		BE213C021C69733C912CA4A8 /* ASPDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASPDispatch.h; sourceTree = "<group>"; };
+		BE213C35FB9DF93F2926275A /* ASPPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASPPromise.h; sourceTree = "<group>"; };
+		BE213D44C3A82704CA5F64DA /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		BE213E9A93EF7AF060B6D665 /* ASPFuture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASPFuture.h; sourceTree = "<group>"; };
+		BE213F2DC99AB50FA0EBF25D /* ASPPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASPPromise.m; sourceTree = "<group>"; };
+		BE213F59D2D47713A638887E /* ASPDispatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASPDispatch.m; sourceTree = "<group>"; };
+		C510AC87DC32DC0FC1F8BB9A /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		E1FF3B7FB49538C3A6FF2CB9 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		58145CAF1BD699DD009C26DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58145CBC1BD69A19009C26DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58145CC41BD69A19009C26DE /* libASPDispatch-osx.a in Frameworks */,
+				52FAD85747C4EC6937E66E30 /* libPods-Tests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		58145CC01BD69A19009C26DE /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				58145CC11BD69A19009C26DE /* PromiseTests.m */,
+				58145CC31BD69A19009C26DE /* Info.plist */,
+				BE213695EEEEA27CD189FD54 /* DispatchTests.m */,
+				BE213D44C3A82704CA5F64DA /* Common.m */,
+				BE2139CB97281A0747FD781E /* Common.h */,
+				BE213431580FFC4E975B63DC /* FutureTests.m */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		A4F913E3B5F1C0687F7B45D6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C510AC87DC32DC0FC1F8BB9A /* Pods-Tests.debug.xcconfig */,
+				E1FF3B7FB49538C3A6FF2CB9 /* Pods-Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B3E0F7030119FE49472CBF9D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				202AF6C4BF94E960D168FEC3 /* libPods-Tests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE2131AA093C327EC505C24E = {
+			isa = PBXGroup;
+			children = (
+				58145CC01BD69A19009C26DE /* Tests */,
+				BE2137A0D693F4E06E504AF5 /* Products */,
+				BE213B4107A26345BC5876C9 /* ASPDispatch */,
+				A4F913E3B5F1C0687F7B45D6 /* Pods */,
+				B3E0F7030119FE49472CBF9D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		BE2137A0D693F4E06E504AF5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				58145CB21BD699DD009C26DE /* libASPDispatch-osx.a */,
+				58145CBF1BD69A19009C26DE /* Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BE213B4107A26345BC5876C9 /* ASPDispatch */ = {
+			isa = PBXGroup;
+			children = (
+				BE213F2DC99AB50FA0EBF25D /* ASPPromise.m */,
+				BE213C35FB9DF93F2926275A /* ASPPromise.h */,
+				BE21389BE18F5AFCDC684B31 /* ASPFuture.m */,
+				BE213E9A93EF7AF060B6D665 /* ASPFuture.h */,
+				BE213F59D2D47713A638887E /* ASPDispatch.m */,
+				BE213C021C69733C912CA4A8 /* ASPDispatch.h */,
+			);
+			path = ASPDispatch;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		58145CB01BD699DD009C26DE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE213F006EB807495016C1F0 /* ASPPromise.h in Headers */,
+				BE213A239375339502A970FF /* ASPFuture.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		58145CB11BD699DD009C26DE /* ASPDispatch-osx */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58145CB81BD699DD009C26DE /* Build configuration list for PBXNativeTarget "ASPDispatch-osx" */;
+			buildPhases = (
+				58145CAE1BD699DD009C26DE /* Sources */,
+				58145CAF1BD699DD009C26DE /* Frameworks */,
+				58145CB01BD699DD009C26DE /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ASPDispatch-osx";
+			productName = "ASPObjectyFuture-osx";
+			productReference = 58145CB21BD699DD009C26DE /* libASPDispatch-osx.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		58145CBE1BD69A19009C26DE /* Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58145CC71BD69A19009C26DE /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildPhases = (
+				BC413B5E918A07BDC536115B /* Check Pods Manifest.lock */,
+				58145CBB1BD69A19009C26DE /* Sources */,
+				58145CBC1BD69A19009C26DE /* Frameworks */,
+				58145CBD1BD69A19009C26DE /* Resources */,
+				6FF3FD8418EFD3EEB799093E /* Embed Pods Frameworks */,
+				A33D01EE61DCC33C35C6931C /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				58145CC61BD69A19009C26DE /* PBXTargetDependency */,
+			);
+			name = Tests;
+			productName = Tests;
+			productReference = 58145CBF1BD69A19009C26DE /* Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BE213F0BA27169CD59886ABB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = aspcartman;
+				TargetAttributes = {
+					58145CB11BD699DD009C26DE = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+					58145CBE1BD69A19009C26DE = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+				};
+			};
+			buildConfigurationList = BE21363A427EA68C63312C2F /* Build configuration list for PBXProject "ASPDispatch" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BE2131AA093C327EC505C24E;
+			productRefGroup = BE2137A0D693F4E06E504AF5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				58145CB11BD699DD009C26DE /* ASPDispatch-osx */,
+				58145CBE1BD69A19009C26DE /* Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		58145CBD1BD69A19009C26DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6FF3FD8418EFD3EEB799093E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A33D01EE61DCC33C35C6931C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BC413B5E918A07BDC536115B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		58145CAE1BD699DD009C26DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE2131FC8D80CF465D86D189 /* ASPPromise.m in Sources */,
+				BE21316B44FBEAA6D452A4A8 /* ASPFuture.m in Sources */,
+				BE21341E873897383E8CB262 /* ASPDispatch.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58145CBB1BD69A19009C26DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58145CC21BD69A19009C26DE /* PromiseTests.m in Sources */,
+				BE213D9105E2305C14CA7D9D /* Common.m in Sources */,
+				BE213211883BA5266871C324 /* FutureTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		58145CC61BD69A19009C26DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 58145CB11BD699DD009C26DE /* ASPDispatch-osx */;
+			targetProxy = 58145CC51BD69A19009C26DE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		58145CB91BD699DD009C26DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "ASPDispatch-osx";
+			};
+			name = Debug;
+		};
+		58145CBA1BD699DD009C26DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "ASPDispatch-osx";
+			};
+			name = Release;
+		};
+		58145CC81BD69A19009C26DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C510AC87DC32DC0FC1F8BB9A /* Pods-Tests.debug.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.hopto.aspcart.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		58145CC91BD69A19009C26DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1FF3B7FB49538C3A6FF2CB9 /* Pods-Tests.release.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.hopto.aspcart.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BE21364BAF4E516451DBC08F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		BE213AA5ABD013B6D1FC5D66 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		58145CB81BD699DD009C26DE /* Build configuration list for PBXNativeTarget "ASPDispatch-osx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58145CB91BD699DD009C26DE /* Debug */,
+				58145CBA1BD699DD009C26DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58145CC71BD69A19009C26DE /* Build configuration list for PBXNativeTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58145CC81BD69A19009C26DE /* Debug */,
+				58145CC91BD69A19009C26DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE21363A427EA68C63312C2F /* Build configuration list for PBXProject "ASPDispatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE213AA5ABD013B6D1FC5D66 /* Debug */,
+				BE21364BAF4E516451DBC08F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BE213F0BA27169CD59886ABB /* Project object */;
+}

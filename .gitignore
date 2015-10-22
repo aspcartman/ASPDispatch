@@ -1,0 +1,25 @@
+# OSX noise
+.DS_Store
+profile
+
+# Xcode noise
+build/*
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+*.xcworkspace
+xcuserdata
+
+# Pods
+Pods
+Podfile.lock
+
+# Appcode noise
+.idea
+
+# svn & cvs
+.svn
+CVS
