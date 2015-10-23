@@ -10,9 +10,9 @@
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
 typedef NS_ENUM(NSInteger, ASPFutureType)
 {
-	ASPFutureTypeInline = 0,
+	ASPFutureTypeInline   = 0,
 	ASPFutureTypeDispatch = 1,
-	ASPFutureTypeAsync = 2,
+	ASPFutureTypeAsync    = 2,
 };
 
 @implementation ASPFuture
@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger, ASPFutureType)
 @dynamic result;
 @dynamic error;
 @dynamic done;
+@dynamic promise;
 
 #pragma mark Create
 
@@ -74,6 +75,11 @@ typedef NS_ENUM(NSInteger, ASPFutureType)
 }
 
 #pragma mark Do Stuff
+
+- (ASPPromise *) promise
+{
+	return _promise;
+}
 
 - (void) run
 {
@@ -147,4 +153,5 @@ typedef NS_ENUM(NSInteger, ASPFutureType)
 	[invocation invokeWithTarget:_promise];
 }
 @end
+
 #pragma clang diagnostic pop

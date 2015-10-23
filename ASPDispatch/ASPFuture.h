@@ -11,9 +11,10 @@
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASPFuture<T> : NSProxy
-@property (nonatomic, readonly) T       result;
-@property (nonatomic, readonly) NSError *error;
-@property (nonatomic, readonly) BOOL    done;
+@property (nonatomic, readonly) ASPPromise *promise;
+@property (nonatomic, readonly) T          result;
+@property (nonatomic, readonly) NSError    *error;
+@property (nonatomic, readonly) BOOL       done;
 
 // Defaults to inline future
 + (instancetype) future:(void (^)(ASPPromise *p))block;
