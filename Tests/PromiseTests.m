@@ -72,16 +72,52 @@ SpecBegin(Promise)
 			});
 		});
 
-		it(@"Throws on nil result", ^{
+		it(@"Allows setting nil result", ^{
 			run(background, ^{
+				expect(^{
+					p.result = nil;
+				}).toNot.raiseAny();
+			});
+		});
+
+		it(@"Allows setting nil error", ^{
+			run(background, ^{
+				expect(^{
+					p.error = nil;
+				}).toNot.raiseAny();
+			});
+		});
+
+		it(@"Allows setting nil result after set error", ^{
+			run(background, ^{
+				p.error = (id)@(0);
+				expect(^{
+					p.result = nil;
+				}).toNot.raiseAny();
+			});
+		});
+
+		it(@"Allows setting nil error after set result", ^{
+			run(background, ^{
+				p.result = @(0);
+				expect(^{
+					p.error = nil;
+				}).toNot.raiseAny();
+			});
+		});
+
+		it(@"Throws on niling result", ^{
+			run(background, ^{
+				p.result = @(0);
 				expect(^{
 					p.result = nil;
 				}).to.raiseAny();
 			});
 		});
 
-		it(@"Throws on nil error", ^{
+		it(@"Throws on niling error", ^{
 			run(background, ^{
+				p.error = (id) @(0);
 				expect(^{
 					p.error = nil;
 				}).to.raiseAny();

@@ -35,6 +35,7 @@
 		58145CBF1BD69A19009C26DE /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		58145CC11BD69A19009C26DE /* PromiseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PromiseTests.m; sourceTree = "<group>"; };
 		58145CC31BD69A19009C26DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE21334CC1E992914CF5AAE9 /* ASPDispatch.podspec */ = {isa = PBXFileReference; lastKnownFileType = file.podspec; path = ASPDispatch.podspec; sourceTree = "<group>"; };
 		BE213431580FFC4E975B63DC /* FutureTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FutureTests.m; sourceTree = "<group>"; };
 		BE213695EEEEA27CD189FD54 /* DispatchTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchTests.m; sourceTree = "<group>"; };
 		BE21389BE18F5AFCDC684B31 /* ASPFuture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASPFuture.m; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 				BE213B4107A26345BC5876C9 /* ASPDispatch */,
 				A4F913E3B5F1C0687F7B45D6 /* Pods */,
 				B3E0F7030119FE49472CBF9D /* Frameworks */,
+				BE21334CC1E992914CF5AAE9 /* ASPDispatch.podspec */,
 			);
 			sourceTree = "<group>";
 		};

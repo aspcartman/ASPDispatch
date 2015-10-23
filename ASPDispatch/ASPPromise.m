@@ -99,11 +99,15 @@
 
 - (void) setResult:(id)result
 {
-	NSParameterAssert(result);
+	NSParameterAssert(_result == nil);
+	NSParameterAssert(result == nil || _error == nil);
 	NSParameterAssert(![NSThread isMainThread]);
-	NSParameterAssert(![self done]);
-	_result = result;
-	dispatch_group_leave(_group);
+	if (result)
+	{
+		NSParameterAssert(![self done]);
+		_result = result;
+		dispatch_group_leave(_group);
+	}
 }
 
 - (NSError *) error
@@ -115,11 +119,15 @@
 
 - (void) setError:(NSError *)error
 {
-	NSParameterAssert(error);
+	NSParameterAssert(_error == nil);
+	NSParameterAssert(error == nil || _result == nil);
 	NSParameterAssert(![NSThread isMainThread]);
-	NSParameterAssert(![self done]);
-	_error = error;
-	dispatch_group_leave(_group);
+	if (error)
+	{
+		NSParameterAssert(![self done]);
+		_error = error;
+		dispatch_group_leave(_group);
+	}
 }
 
 - (BOOL) done
@@ -143,7 +151,7 @@
 - (void) merge:(ASPPromise *)otherPromise
 {
 	_result = otherPromise.result;
-	_error = otherPromise.error;
+	_error  = otherPromise.error;
 	dispatch_group_leave(_group);
 }
 @end
@@ -163,8 +171,8 @@
 
 - (void) setResult:(id)result
 {
-	NSParameterAssert(result);
-	NSParameterAssert(_result == nil && _error == nil);
+	NSParameterAssert(_result == nil);
+	NSParameterAssert(result == nil || _error == nil);
 	_result = result;
 }
 
@@ -176,8 +184,8 @@
 
 - (void) setError:(NSError *)error
 {
-	NSParameterAssert(error);
-	NSParameterAssert(_result == nil && _error == nil);
+	NSParameterAssert(_error == nil);
+	NSParameterAssert(error == nil || _result == nil);
 	_error = error;
 }
 
@@ -202,6 +210,6 @@
 - (void) merge:(ASPPromise *)otherPromise
 {
 	_result = otherPromise.result;
-	_error = otherPromise.error;
+	_error  = otherPromise.error;
 }
 @end
