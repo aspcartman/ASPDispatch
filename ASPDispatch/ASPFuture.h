@@ -10,7 +10,8 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
 
-@interface ASPFuture<T> : NSObject
+@interface ASPFuture
+<T> : NSObject
 @property (nonatomic, readonly) ASPPromise *promise;
 @property (nonatomic, readonly) T          result;
 @property (nonatomic, readonly) NSError    *error;
@@ -62,7 +63,7 @@
 - (instancetype) retryOnErrorOnce;
 - (instancetype) retryOnError:(NSUInteger)times;
 - (instancetype) retryTimes:(NSUInteger)times while:(BOOL(^)(ASPPromise *))block;
-- (instancetype) map:(void (^)(ASPFuture *, ASPPromise *))block;
+- (instancetype) map:(void (^)(ASPPromise *out, ASPFuture *in))block;
 @end
 
 #pragma clang diagnostic pop

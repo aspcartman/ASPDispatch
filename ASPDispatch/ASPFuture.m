@@ -8,13 +8,6 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
-typedef NS_ENUM(NSInteger, ASPFutureType)
-{
-	ASPFutureTypeInline   = 0,
-	ASPFutureTypeDispatch = 1,
-	ASPFutureTypeAsync    = 2,
-};
-
 @interface ASPFutureInline : ASPFuture
 + (instancetype) futureWithBlock:(void (^)(ASPPromise *p))block;
 @end
@@ -28,7 +21,6 @@ typedef NS_ENUM(NSInteger, ASPFutureType)
 @end
 
 @interface ASPFutureOnDemand : ASPFuture
-+ (instancetype) futureWithBlock:(void (^)(ASPPromise *p))block;
 @end
 
 @implementation ASPFuture
@@ -134,10 +126,10 @@ typedef NS_ENUM(NSInteger, ASPFutureType)
 	}];
 }
 
-- (instancetype) map:(void (^)(ASPFuture *in, ASPPromise *out))block
+- (instancetype) map:(void (^)(ASPPromise *out, ASPFuture *in))block
 {
 	return [ASPFutureOnDemand futureWithBlock:^(ASPPromise *promise) {
-		block(self, promise);
+		block(promise, self);
 	}];
 }
 

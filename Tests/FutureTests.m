@@ -35,7 +35,7 @@ SpecBegin(Future)
 		it(@"Maps", ^{
 			f = [[ASPFuture inlineFuture:^(ASPPromise *p) {
 				p.result = @(10);
-			}] map:^(ASPFuture *f, ASPPromise *p) {
+			}] map:^(ASPPromise *p,ASPFuture *f) {
 				p.result = @([f.result integerValue] + 5);
 			}];
 			expect(f.result).to.equal(@(15));
@@ -45,7 +45,7 @@ SpecBegin(Future)
 			f = [[ASPFuture dispatchFuture:^(ASPPromise *p) {
 				count++;
 				p.result = @(10);
-			}] map:^(ASPFuture *f, ASPPromise *p) {
+			}] map:^(ASPPromise *p, ASPFuture *f) {
 				count++;
 				p.result = @([f.result integerValue] + 5);
 			}];
