@@ -15,12 +15,26 @@ typedef NS_ENUM(NSInteger, ASPFutureType)
 	ASPFutureTypeAsync    = 2,
 };
 
+@interface ASPFutureInline : ASPFuture
++ (instancetype) futureWithBlock:(void (^)(ASPPromise *p))block;
+@end
+
+@interface ASPFutureDispatch : ASPFuture
++ (instancetype) futureWithBlock:(void (^)(ASPPromise *p))block;
+@end
+
+@interface ASPFutureAsync : ASPFuture
++ (instancetype) futureOnQueue:(dispatch_queue_t)queue withBlock:(void (^)(ASPPromise *))block;
+@end
+
+@interface ASPFutureOnDemand : ASPFuture
++ (instancetype) futureWithBlock:(void (^)(ASPPromise *p))block;
+@end
+
 @implementation ASPFuture
 {
-	ASPPromise       *_promise;
-	ASPFutureType    _type;
-	dispatch_queue_t _queue;
-
+@package
+	ASPPromise *_promise;
 	void(^_block)(ASPPromise *);
 }
 
@@ -31,46 +45,61 @@ typedef NS_ENUM(NSInteger, ASPFutureType)
 
 #pragma mark Create
 
-+ (instancetype) future:(void (^)(ASPPromise *p))block
-{
-	return [self inlineFuture:block];
-}
-
+/*
+ * Those methods is what public use to get access to specific subclasses
+ */
 + (instancetype) inlineFuture:(void (^)(ASPPromise *p))block
 {
-	return [self futureWithPromise:[ASPPromise new] type:ASPFutureTypeInline queue:nil block:block];
+	return [ASPFutureInline futureWithBlock:block];
 }
 
-+ (instancetype) routineFuture:(void (^)(ASPPromise *p))block
++ (instancetype) onDemandFuture:(void (^)(ASPPromise *p))block
 {
-	return [self futureWithPromise:[ASPPromise new] type:ASPFutureTypeDispatch queue:nil block:block];
+	return [ASPFutureOnDemand futureWithBlock:block];
+}
+
++ (instancetype) dispatchFuture:(void (^)(ASPPromise *p))block
+{
+	return [ASPFutureDispatch futureWithBlock:block];
+}
+
++ (instancetype) future:(void (^)(ASPPromise *p))block
+{
+	return [ASPFutureDispatch futureWithBlock:block];
 }
 
 + (instancetype) mainFuture:(void (^)(ASPPromise *p))block
 {
-	return [self asyncFutureOnQueue:dispatch_get_main_queue() block:block];
+	return [ASPFutureAsync futureOnQueue:dispatch_get_main_queue() withBlock:block];
 }
 
 + (instancetype) asyncFuture:(void (^)(ASPPromise *p))block
 {
-	return [self asyncFutureOnQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) block:block];
+	return [ASPFutureAsync futureOnQueue:dispatch_get_main_queue() withBlock:block];
 }
 
 + (instancetype) asyncFutureOnQueue:(dispatch_queue_t)queue block:(void (^)(ASPPromise *p))block
 {
-	return [self futureWithPromise:[ASPPromise new] type:ASPFutureTypeAsync queue:queue block:block];
+	return [ASPFutureAsync futureOnQueue:queue withBlock:block];
 }
 
-+ (instancetype) futureWithPromise:(ASPPromise *)promise type:(ASPFutureType)type queue:(dispatch_queue_t)queue block:(void (^)(ASPPromise *))block
++ (id) alloc
 {
-	ASPFuture *future = [self alloc];
+	if ([self class] == [ASPFuture class])
+	{
+		NSAssert(0, @"Do not call +alloc -init or +new on me, use + *Future: methods && -initWithBlock:.");
+		return nil;
+	}
+	return [self allocWithZone:nil];
+}
+
+#pragma mark Initializer
+
++ (instancetype) futureWithBlock:(void (^)(ASPPromise *p))block
+{
+	ASPFuture *future = [[self alloc] init]; // This will be called by subclasses only, so superclass is ASPFuture.
+	future->_promise = [ASPPromise new];
 	future->_block   = block;
-	future->_promise = promise;
-	future->_queue   = queue;
-	future->_type    = type;
-
-	[future run];
-
 	return future;
 }
 
@@ -79,32 +108,6 @@ typedef NS_ENUM(NSInteger, ASPFutureType)
 - (ASPPromise *) promise
 {
 	return _promise;
-}
-
-- (void) run
-{
-	switch (_type)
-	{
-		case ASPFutureTypeInline:
-		{
-			_block(_promise);
-			break;
-		}
-		case ASPFutureTypeDispatch:
-		{
-			ASPDispatchBlock(^{
-				_block(_promise);
-			});
-			break;
-		}
-		case ASPFutureTypeAsync:
-		{
-			dispatch_async(_queue, ^{
-				_block(_promise);
-			});
-			break;
-		}
-	}
 }
 
 - (instancetype) retryOnErrorOnce
@@ -121,7 +124,7 @@ typedef NS_ENUM(NSInteger, ASPFutureType)
 
 - (instancetype) retryTimes:(NSUInteger)times while:(BOOL(^)(ASPPromise *))block
 {
-	return [ASPFuture futureWithPromise:[ASPPromise new] type:ASPFutureTypeInline queue:nil block:^(ASPPromise *promise) {
+	return [ASPFutureOnDemand futureWithBlock:^(ASPPromise *promise) {
 		for (NSUInteger i = 0; i < times && block(_promise); i++)
 		{
 			[_promise invalidate];
@@ -131,27 +134,115 @@ typedef NS_ENUM(NSInteger, ASPFutureType)
 	}];
 }
 
+- (instancetype) map:(void (^)(ASPFuture *in, ASPPromise *out))block
+{
+	return [ASPFutureOnDemand futureWithBlock:^(ASPPromise *promise) {
+		block(self, promise);
+	}];
+}
+
+- (void) run
+{
+	NSParameterAssert(0);
+}
+
 #pragma mark Proxy
 
-+ (NSMethodSignature *) methodSignatureForSelector:(SEL)sel
+- (id) forwardingTargetForSelector:(SEL)aSelector
 {
-	return [ASPPromise methodSignatureForSelector:sel];
-}
-
-+ (void) forwardInvocation:(NSInvocation *)invocation
-{
-	[invocation invokeWithTarget:[ASPPromise class]];
-}
-
-- (NSMethodSignature *) methodSignatureForSelector:(SEL)sel
-{
-	return [_promise methodSignatureForSelector:sel];
-}
-
-- (void) forwardInvocation:(NSInvocation *)invocation
-{
-	[invocation invokeWithTarget:_promise];
+	return _promise;
 }
 @end
 
 #pragma clang diagnostic pop
+
+#pragma mark Inline
+
+@implementation ASPFutureInline
++ (instancetype) futureWithBlock:(void (^)(ASPPromise *p))block
+{
+	ASPFuture *future = [super futureWithBlock:block];
+	[future run];
+	return (ASPFutureInline *) future;
+}
+
+- (void) run
+{
+	_block(_promise);
+}
+@end
+
+#pragma mark Dispatch
+
+@implementation ASPFutureDispatch
++ (instancetype) futureWithBlock:(void (^)(ASPPromise *p))block
+{
+	ASPFuture *future = [super futureWithBlock:block];
+	[future run];
+	return (ASPFutureDispatch *) future;
+}
+
+- (void) run
+{
+	ASPDispatchBlock(^{
+		_block(_promise);
+	});
+}
+@end
+
+#pragma mark Async
+
+@implementation ASPFutureAsync
+{
+	dispatch_queue_t _queue;
+}
++ (instancetype) futureWithBlock:(void (^)(ASPPromise *p))block
+{
+	NSAssert(0, @"Call +futureOnQueue:withBlock:");
+	return nil;
+}
+
++ (instancetype) futureOnQueue:(dispatch_queue_t)queue withBlock:(void (^)(ASPPromise *))block
+{
+	ASPFutureAsync *f = (ASPFutureAsync *) [super futureWithBlock:block];
+	f->_queue = queue;
+	[f run];
+	return f;
+}
+
+- (void) run
+{
+	dispatch_async(_queue, ^{
+		_block(_promise);
+	});
+}
+@end
+
+#pragma mark OnDemand
+
+@implementation ASPFutureOnDemand
+- (void) run
+{
+	if (!_promise.done)
+	{
+		_block(_promise);
+	}
+}
+
+- (id) result
+{
+	[self run];
+	return _promise.result;
+}
+
+- (NSError *) error
+{
+	[self run];
+	return _promise.error;
+}
+
+- (void) wait
+{
+	[self run];
+}
+@end

@@ -19,13 +19,38 @@ SpecBegin(Future)
 		p.error = (id) @(0);
 	};
 
-	describe(@"Retry",^{
+	describe(@"Retry", ^{
 		it(@"Retries once", ^{
 			__block int count = 0;
-			f = [[ASPFuture future:^(ASPPromise *p){
+			f = [[ASPFuture inlineFuture:^(ASPPromise *p) {
 				count++;
 				p.error = (id) @(0);
 			}] retryOnErrorOnce];
+			f.result;
+			expect(count).to.equal(2);
+		});
+	});
+
+	describe(@"Mapping", ^{
+		it(@"Maps", ^{
+			f = [[ASPFuture inlineFuture:^(ASPPromise *p) {
+				p.result = @(10);
+			}] map:^(ASPFuture *f, ASPPromise *p) {
+				p.result = @([f.result integerValue] + 5);
+			}];
+			expect(f.result).to.equal(@(15));
+		});
+		it(@"Map creation doesn't trigger future", ^{
+			__block int count = 0;
+			f = [[ASPFuture dispatchFuture:^(ASPPromise *p) {
+				count++;
+				p.result = @(10);
+			}] map:^(ASPFuture *f, ASPPromise *p) {
+				count++;
+				p.result = @([f.result integerValue] + 5);
+			}];
+			expect(count).to.equal(0);
+			expect(f.result).to.equal(@(15));
 			expect(count).to.equal(2);
 		});
 	});
