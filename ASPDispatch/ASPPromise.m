@@ -1,6 +1,6 @@
 //
 // Created by ASPCartman on 21/10/15.
-// Copyright (c) 2015 aspcartman. All rights reserved.
+// Copyright (c) 2015 ASPCartman. All rights reserved.
 //
 
 #import "ASPPromise.h"

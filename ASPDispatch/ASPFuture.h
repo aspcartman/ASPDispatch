@@ -1,16 +1,17 @@
 //
 // Created by ASPCartman on 21/10/15.
-// Copyright (c) 2015 aspcartman. All rights reserved.
+// Copyright (c) 2015 ASPCartman. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 #import "ASPPromise.h"
 
-@interface ASPFuture<T> : NSProxy
+@interface ASPFuture
+<T> : NSProxy
 @property (nonatomic, readonly) T       result;
 @property (nonatomic, readonly) NSError *error;
-@property (nonatomic, readonly) BOOL  done;
+@property (nonatomic, readonly) BOOL    done;
 
 
 + (instancetype) future:(void (^)(ASPPromise *p))block;
@@ -40,7 +41,6 @@
 + (instancetype) routineFuture:(void (^)(ASPPromise *p))block;
 
 + (instancetype) futureWithPromise:(ASPPromise *)promise;
-
 @end
 
 

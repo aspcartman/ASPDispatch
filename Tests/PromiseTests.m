@@ -13,7 +13,6 @@
 SpecBegin(Promise)
 	__block ASPPromise *p;
 
-
 	describe(@"ClassCluster", ^{
 		it(@"Creates a ASPPromiseRunLoopSpinner by default on main thread", ^{
 			run(NO, ^{
@@ -128,7 +127,7 @@ SpecBegin(Promise)
 		it(@"Waits for result", ^{
 			run(background, ^{
 				NSDate *start = [NSDate new];
-				dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), background ? dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) : dispatch_get_main_queue() , ^{
+				dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), background ? dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) : dispatch_get_main_queue(), ^{
 					p.result = @(0);
 				});
 				expect(p.result).to.equal(@(0));
@@ -149,15 +148,17 @@ SpecBegin(Promise)
 	});
 
 	sharedExamplesFor(@"Promise In Background", ^(NSDictionary *data) {
-		itShouldBehaveLike(@"Common", @{ @"background" : @(YES),  @"object" : data[@"object"] });
+		itShouldBehaveLike(@"Common", @{ @"background" : @(YES), @"object" : data[@"object"] });
 	});
 
 	sharedExamplesFor(@"Promise On MainThread", ^(NSDictionary *data) {
-		itShouldBehaveLike(@"Common",  @{ @"background" : @(NO), @"object" : data[@"object"] });
+		itShouldBehaveLike(@"Common", @{ @"background" : @(NO), @"object" : data[@"object"] });
 	});
 
 	describe(@"Blocker", ^{
-		itShouldBehaveLike(@"Promise In Background", @{ @"object" : ^{return [ASPPromise blockingPromise];}});
+		itShouldBehaveLike(@"Promise In Background", @{ @"object" : ^{
+			return [ASPPromise blockingPromise];
+		} });
 
 		beforeEach(^{
 			p = [ASPPromise blockingPromise];
@@ -195,7 +196,11 @@ SpecBegin(Promise)
 	});
 
 	describe(@"RunLooper", ^{
-		itShouldBehaveLike(@"Promise In Background", @{ @"object" : ^{return [ASPPromise runLoopingPromise];}});
-		itShouldBehaveLike(@"Promise On MainThread", @{ @"object" : ^{return [ASPPromise runLoopingPromise];}});
+		itShouldBehaveLike(@"Promise In Background", @{ @"object" : ^{
+			return [ASPPromise runLoopingPromise];
+		} });
+		itShouldBehaveLike(@"Promise On MainThread", @{ @"object" : ^{
+			return [ASPPromise runLoopingPromise];
+		} });
 	});
 SpecEnd

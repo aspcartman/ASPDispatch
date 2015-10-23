@@ -191,7 +191,7 @@
 		BE213F0BA27169CD59886ABB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				ORGANIZATIONNAME = aspcartman;
+				ORGANIZATIONNAME = ASPCartman;
 				TargetAttributes = {
 					58145CB11BD699DD009C26DE = {
 						CreatedOnToolsVersion = 7.0.1;

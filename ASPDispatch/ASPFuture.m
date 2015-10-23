@@ -1,6 +1,6 @@
 //
 // Created by ASPCartman on 21/10/15.
-// Copyright (c) 2015 aspcartman. All rights reserved.
+// Copyright (c) 2015 ASPCartman. All rights reserved.
 //
 
 #import "ASPFuture.h"
@@ -57,13 +57,14 @@
 {
 	ASPPromise *promise = [ASPPromise new];
 	dispatch_async(queue, ^{
-			block(promise);
+		block(promise);
 	});
 
 	return [self futureWithPromise:promise];
 }
 
-+ (instancetype) futureWithPromise:(ASPPromise *)promise {
++ (instancetype) futureWithPromise:(ASPPromise *)promise
+{
 	ASPFuture *future = [self alloc];
 	future->_promise = promise;
 	return future;
