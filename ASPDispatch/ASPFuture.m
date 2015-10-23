@@ -6,14 +6,29 @@
 #import "ASPFuture.h"
 #import "ASPDispatch.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+typedef NS_ENUM(NSInteger, ASPFutureType)
+{
+	ASPFutureTypeInline = 0,
+	ASPFutureTypeDispatch = 1,
+	ASPFutureTypeAsync = 2,
+};
+
 @implementation ASPFuture
 {
-	ASPPromise *_promise;
+	ASPPromise       *_promise;
+	ASPFutureType    _type;
+	dispatch_queue_t _queue;
+
+	void(^_block)(ASPPromise *);
 }
 
 @dynamic result;
 @dynamic error;
 @dynamic done;
+
+#pragma mark Create
 
 + (instancetype) future:(void (^)(ASPPromise *p))block
 {
@@ -22,30 +37,17 @@
 
 + (instancetype) inlineFuture:(void (^)(ASPPromise *p))block
 {
-	ASPPromise *promise = [ASPPromise new];
-	block(promise);
-
-	return [self futureWithPromise:promise];
+	return [self futureWithPromise:[ASPPromise new] type:ASPFutureTypeInline queue:nil block:block];
 }
 
 + (instancetype) routineFuture:(void (^)(ASPPromise *p))block
 {
-	ASPPromise *promise = [ASPPromise new];
-	ASPDispatchBlock(^{
-		block(promise);
-	});
-
-	return [self futureWithPromise:promise];
+	return [self futureWithPromise:[ASPPromise new] type:ASPFutureTypeDispatch queue:nil block:block];
 }
 
 + (instancetype) mainFuture:(void (^)(ASPPromise *p))block
 {
-	ASPPromise *promise = [ASPPromise new];
-	ASPDispatchBlock(^{
-		block(promise);
-	});
-
-	return [self futureWithPromise:promise];
+	return [self asyncFutureOnQueue:dispatch_get_main_queue() block:block];
 }
 
 + (instancetype) asyncFuture:(void (^)(ASPPromise *p))block
@@ -55,20 +57,75 @@
 
 + (instancetype) asyncFutureOnQueue:(dispatch_queue_t)queue block:(void (^)(ASPPromise *p))block
 {
-	ASPPromise *promise = [ASPPromise new];
-	dispatch_async(queue, ^{
-		block(promise);
-	});
-
-	return [self futureWithPromise:promise];
+	return [self futureWithPromise:[ASPPromise new] type:ASPFutureTypeAsync queue:queue block:block];
 }
 
-+ (instancetype) futureWithPromise:(ASPPromise *)promise
++ (instancetype) futureWithPromise:(ASPPromise *)promise type:(ASPFutureType)type queue:(dispatch_queue_t)queue block:(void (^)(ASPPromise *))block
 {
 	ASPFuture *future = [self alloc];
+	future->_block   = block;
 	future->_promise = promise;
+	future->_queue   = queue;
+	future->_type    = type;
+
+	[future run];
+
 	return future;
 }
+
+#pragma mark Do Stuff
+
+- (void) run
+{
+	switch (_type)
+	{
+		case ASPFutureTypeInline:
+		{
+			_block(_promise);
+			break;
+		}
+		case ASPFutureTypeDispatch:
+		{
+			ASPDispatchBlock(^{
+				_block(_promise);
+			});
+			break;
+		}
+		case ASPFutureTypeAsync:
+		{
+			dispatch_async(_queue, ^{
+				_block(_promise);
+			});
+			break;
+		}
+	}
+}
+
+- (instancetype) retryOnErrorOnce
+{
+	return [self retryOnError:1];
+}
+
+- (instancetype) retryOnError:(NSUInteger)times
+{
+	return [self retryTimes:times while:^BOOL(ASPPromise *p) {
+		return self.error != nil;
+	}];
+};
+
+- (instancetype) retryTimes:(NSUInteger)times while:(BOOL(^)(ASPPromise *))block
+{
+	return [ASPFuture futureWithPromise:[ASPPromise new] type:ASPFutureTypeInline queue:nil block:^(ASPPromise *promise) {
+		for (NSUInteger i = 0; i < times && block(_promise); i++)
+		{
+			[_promise invalidate];
+			[self run];
+		}
+		[promise merge:_promise];
+	}];
+}
+
+#pragma mark Proxy
 
 + (NSMethodSignature *) methodSignatureForSelector:(SEL)sel
 {
@@ -90,3 +147,4 @@
 	[invocation invokeWithTarget:_promise];
 }
 @end
+#pragma clang diagnostic pop

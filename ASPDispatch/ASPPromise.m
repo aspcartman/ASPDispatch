@@ -49,12 +49,13 @@
 	return [ASPPromiseRunLoopSpinner new];
 }
 
-+ (void) wait:(NSArray<ASPPromise*>*)promises {
-	for (ASPPromise *p in promises){
++ (void) wait:(NSArray<ASPPromise *> *)promises
+{
+	for (ASPPromise *p in promises)
+	{
 		[p wait];
 	}
 }
-
 @end
 
 #pragma clang diagnostic pop
@@ -131,6 +132,20 @@
 {
 	dispatch_group_wait(_group, DISPATCH_TIME_FOREVER);
 }
+
+- (void) invalidate
+{
+	[self wait];
+	_result = _error = nil;
+	dispatch_group_enter(_group);
+}
+
+- (void) merge:(ASPPromise *)otherPromise
+{
+	_result = otherPromise.result;
+	_error = otherPromise.error;
+	dispatch_group_leave(_group);
+}
 @end
 
 
@@ -176,5 +191,17 @@
 	ASPDispatchWait(^{
 		return [self done];
 	});
+}
+
+- (void) invalidate
+{
+	[self wait];
+	_result = _error = nil;
+}
+
+- (void) merge:(ASPPromise *)otherPromise
+{
+	_result = otherPromise.result;
+	_error = otherPromise.error;
 }
 @end
