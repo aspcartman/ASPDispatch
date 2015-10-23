@@ -5,13 +5,21 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ASPPromise
-<T> : NSObject
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
+@interface ASPPromise <T> : NSObject
++ (instancetype) promise; // Same as -new
++ (instancetype) blockingPromise;
++ (instancetype) runLoopingPromise;
+
++ (void) wait:(NSArray<ASPPromise*>*)promises;
+
 @property (nonatomic, strong) T       result;
 @property (nonatomic, strong) NSError *error;
 @property (nonatomic, readonly) BOOL  done;
 
-+ (instancetype) promise; // Same as -new
-+ (instancetype) blockingPromise;
-+ (instancetype) runLoopingPromise;
+- (void) wait;
 @end
+
+#pragma clang diagnostic pop

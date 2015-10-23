@@ -7,13 +7,11 @@
 
 #import "ASPPromise.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface ASPFuture
 <T> : NSProxy
-@property (nonatomic, readonly) T       result;
-@property (nonatomic, readonly) NSError *error;
-@property (nonatomic, readonly) BOOL    done;
-
-
 + (instancetype) future:(void (^)(ASPPromise *p))block;
 
 /*
@@ -41,6 +39,15 @@
 + (instancetype) routineFuture:(void (^)(ASPPromise *p))block;
 
 + (instancetype) futureWithPromise:(ASPPromise *)promise;
+
+
++ (void) wait:(NSArray<ASPFuture *> *)futures;
+
+@property (nonatomic, readonly) T       result;
+@property (nonatomic, readonly) NSError *error;
+@property (nonatomic, readonly) BOOL    done;
+
+- (void) wait;
 @end
 
-
+#pragma clang diagnostic pop

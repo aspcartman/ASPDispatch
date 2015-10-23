@@ -23,6 +23,7 @@
 @implementation ASPPromise
 @dynamic result;
 @dynamic error;
+@dynamic done;
 
 + (instancetype) alloc
 {
@@ -47,6 +48,13 @@
 {
 	return [ASPPromiseRunLoopSpinner new];
 }
+
++ (void) wait:(NSArray<ASPPromise*>*)promises {
+	for (ASPPromise *p in promises){
+		[p wait];
+	}
+}
+
 @end
 
 #pragma clang diagnostic pop
@@ -64,6 +72,7 @@
 	self = [super init];
 	if (self)
 	{
+		// Dispatch group instead of dispatch_semaphore since the ability to wait for zero.
 		dispatch_group_t group = dispatch_group_create();
 		dispatch_group_enter(group);
 		_group                 = group;
@@ -91,7 +100,7 @@
 {
 	NSParameterAssert(result);
 	NSParameterAssert(![NSThread isMainThread]);
-	NSParameterAssert(_result == nil && _error == nil);
+	NSParameterAssert(![self done]);
 	_result = result;
 	dispatch_group_leave(_group);
 }
@@ -107,7 +116,7 @@
 {
 	NSParameterAssert(error);
 	NSParameterAssert(![NSThread isMainThread]);
-	NSParameterAssert(_result == nil && _error == nil);
+	NSParameterAssert(![self done]);
 	_error = error;
 	dispatch_group_leave(_group);
 }
@@ -117,6 +126,11 @@
 	NSParameterAssert(![NSThread isMainThread]);
 	return dispatch_group_wait(_group, DISPATCH_TIME_NOW) == 0;
 }
+
+- (void) wait
+{
+	dispatch_group_wait(_group, DISPATCH_TIME_FOREVER);
+}
 @end
 
 
@@ -124,19 +138,6 @@
 {
 	id      _result;
 	NSError *_error;
-
-	dispatch_semaphore_t _sema;
-}
-
-- (instancetype) init
-{
-	self = [super init];
-	if (self)
-	{
-		_sema = dispatch_semaphore_create(1);
-	}
-
-	return self;
 }
 
 - (id) result

@@ -70,6 +70,15 @@
 	return future;
 }
 
++ (NSMethodSignature *) methodSignatureForSelector:(SEL)sel
+{
+	return [ASPPromise methodSignatureForSelector:sel];
+}
+
++ (void) forwardInvocation:(NSInvocation *)invocation
+{
+	[invocation invokeWithTarget:[ASPPromise class]];
+}
 
 - (NSMethodSignature *) methodSignatureForSelector:(SEL)sel
 {
