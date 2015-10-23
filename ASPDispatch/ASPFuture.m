@@ -236,5 +236,6 @@
 - (void) wait
 {
 	[self run];
+	[_promise wait];
 }
 @end
