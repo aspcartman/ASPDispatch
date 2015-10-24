@@ -20,10 +20,16 @@ static BOOL containsSubString(NSArray *who, NSArray *what)
 	return NO;
 }
 
+
+
+void __ASP_DISPATCH__(void(^block)()){
+	block();
+}
+
 void ASPDispatchBlock(void(^routine)())
 {
 	CFRunLoopPerformBlock(CFRunLoopGetCurrent(), kCFRunLoopDefaultMode, ^{
-		routine();
+		__ASP_DISPATCH__(routine);
 	});
 }
 
