@@ -21,6 +21,7 @@
 - (void) wait;
 - (void) invalidate;
 - (void) merge:(ASPPromise *)otherPromise;
+- (BOOL) mergeOnError:(ASPPromise *)otherPromise;
 @end
 
 #pragma clang diagnostic pop

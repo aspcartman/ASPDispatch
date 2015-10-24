@@ -56,6 +56,16 @@
 		[p wait];
 	}
 }
+
+- (BOOL) mergeOnError:(ASPPromise *)otherPromise;
+{
+	if (otherPromise.error)
+	{
+		[self merge:otherPromise];
+		return YES;
+	}
+	return NO;
+}
 @end
 
 #pragma clang diagnostic pop
