@@ -140,6 +140,10 @@
 }
 
 #pragma mark Proxy
++ (id) forwardingTargetForSelector:(SEL)aSelector
+{
+	return [ASPPromise class];
+}
 
 - (id) forwardingTargetForSelector:(SEL)aSelector
 {
