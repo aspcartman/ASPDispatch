@@ -100,7 +100,7 @@
 
 - (ASPPromise *) promise
 {
-	return _promise;
+	return (id) self;
 }
 
 - (instancetype) retryOnErrorOnce
