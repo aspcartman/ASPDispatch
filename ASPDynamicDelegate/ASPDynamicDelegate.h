@@ -14,6 +14,8 @@
 /*
  * The block may have no args or if it does it have a first-dummy id
  * argument which will be just nil
+ *
+ * TODO: Fix first arg to be a refence to a delegate, not nil
  */
 - (void) addMethodForSelector:(SEL)sel withBlock:(id)block;
 @end
