@@ -10,8 +10,7 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
 
-@interface ASPFuture
-<T> : NSObject
+@interface ASPFuture<T> : NSObject
 @property (nonatomic, readonly) ASPPromise *promise;
 @property (nonatomic, readonly) T          result;
 @property (nonatomic, readonly) NSError    *error;

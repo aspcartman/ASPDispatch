@@ -5,8 +5,20 @@
 
 #import "ASPDispatch.h"
 
-static BOOL containsSubString(NSArray *who, NSArray *what);
-
+static BOOL containsSubString(NSArray *who, NSArray *what)
+{
+	for (NSString *string in who)
+	{
+		for (NSString *subString in what)
+		{
+			if ([string rangeOfString:subString].location != NSNotFound)
+			{
+				return YES;
+			}
+		}
+	}
+	return NO;
+}
 
 void ASPDispatchBlock(void(^routine)())
 {
@@ -43,18 +55,3 @@ void ASPDispatchWait(BOOL (^completionCheck)())
 	}
 }
 
-
-static BOOL containsSubString(NSArray *who, NSArray *what)
-{
-	for (NSString *string in who)
-	{
-		for (NSString *subString in what)
-		{
-			if ([string rangeOfString:subString].location != NSNotFound)
-			{
-				return YES;
-			}
-		}
-	}
-	return NO;
-}

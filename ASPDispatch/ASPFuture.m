@@ -8,6 +8,7 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @interface ASPFutureInline : ASPFuture
 + (instancetype) futureWithBlock:(void (^)(ASPPromise *p))block;
 @end
@@ -188,6 +189,7 @@
 {
 	dispatch_queue_t _queue;
 }
+
 + (instancetype) futureWithBlock:(void (^)(ASPPromise *p))block
 {
 	NSAssert(0, @"Call +futureOnQueue:withBlock:");
