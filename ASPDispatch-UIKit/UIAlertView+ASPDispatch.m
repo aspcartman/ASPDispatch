@@ -7,19 +7,27 @@
 #import "ASPFuture.h"
 #import "ASPDynamicDelegate.h"
 #import "ASPDispatchUIKitHelpers.h"
+#import "UIAlertController+ASPDispatch.h"
 
 @implementation UIAlertView (ASPDispatch)
-+ (ASPFuture *) asp_showWithTitle:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray *)other
++ (ASPFuture *) asp_showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray *)other
 {
-	return [ASPFuture inlineFuture:^(ASPPromise *p) {
-		if (ASPDispatchOSVersionIsBelow(@"8.0"))
-		{
+	if (ASPDispatchOSVersionIsBelow(@"8.0"))
+	{
+		return [ASPFuture inlineFuture:^(ASPPromise *p) {
 			// iOS 7 and below
 			ASPDynamicDelegate *d = [ASPDynamicDelegate new];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 			[d addMethodForSelector:@selector(alertView:clickedButtonAtIndex:) withBlock:^(id s, id ss, NSInteger index) {
-				p.result = @(index);
+				if (index)
+				{
+					p.result = @(index);
+				}
+				else
+				{
+					p.error = [[NSError alloc] initWithDomain:@"ASPDispatch" code:-1 userInfo:@{ NSLocalizedDescriptionKey : @"User canceled" }];
+				}
 			}];
 #pragma clang diagnostic pop
 			UIAlertView   *view = [[UIAlertView alloc] initWithTitle:title
@@ -33,20 +41,11 @@
 			}
 
 			[view show];
-		}
-		else
-		{
-			UIAlertController *vc = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-			[vc addAction:[UIAlertAction actionWithTitle:cancel ? : other ? NSLocalizedString(@"Cancel", nil) : NSLocalizedString(@"Dismiss", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-				p.result = @(0);
-			}]];
-			[other enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-				[vc addAction:[UIAlertAction actionWithTitle:obj style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-					p.result = @(idx + 1);
-				}]];
-			}];
-			[ASPDispatchCurrentViewController() presentViewController:vc animated:YES completion:nil];
-		}
-	}];
+		}];
+	}
+	else
+	{
+		return [UIAlertController asp_showAlertWithTitle:title message:message cancelButton:cancel otherButtons:other];
+	}
 }
 @end

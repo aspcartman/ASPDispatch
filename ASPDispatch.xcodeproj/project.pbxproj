@@ -25,6 +25,7 @@
 		BE213C8ABE002CCFAD06F29D /* UIAlertView+ASPDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = BE213E4252EA0D9579835F5D /* UIAlertView+ASPDispatch.m */; };
 		BE213D9105E2305C14CA7D9D /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BE213D44C3A82704CA5F64DA /* Common.m */; };
 		BE213F006EB807495016C1F0 /* ASPPromise.h in Headers */ = {isa = PBXBuildFile; fileRef = BE213C35FB9DF93F2926275A /* ASPPromise.h */; };
+		BE213F08760444D41D50B3BF /* UIAlertController+ASPDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = BE213558C4EE3BDAA3AECF5C /* UIAlertController+ASPDispatch.m */; };
 		BE213F48B0564324EB9DC084 /* ASPDynamicDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2139EA5243B675C0BEDFED /* ASPDynamicDelegate.h */; };
 /* End PBXBuildFile section */
 
@@ -58,12 +59,15 @@
 		58145CC31BD69A19009C26DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58CDD3EB1BDAC89A00557FF5 /* libASPDispatch-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libASPDispatch-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE2130158FA6D1A54E44BB32 /* ASPDynamicDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASPDynamicDelegate.m; sourceTree = "<group>"; };
+		BE21305A8832CD65EC7947B6 /* .editorconfig */ = {isa = PBXFileReference; lastKnownFileType = file.editorconfig; path = .editorconfig; sourceTree = "<group>"; };
 		BE21334CC1E992914CF5AAE9 /* ASPDispatch.podspec */ = {isa = PBXFileReference; lastKnownFileType = file.podspec; path = ASPDispatch.podspec; sourceTree = "<group>"; };
 		BE213431580FFC4E975B63DC /* FutureTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FutureTests.m; sourceTree = "<group>"; };
+		BE213558C4EE3BDAA3AECF5C /* UIAlertController+ASPDispatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+ASPDispatch.m"; sourceTree = "<group>"; };
 		BE213695EEEEA27CD189FD54 /* DispatchTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchTests.m; sourceTree = "<group>"; };
 		BE21389BE18F5AFCDC684B31 /* ASPFuture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASPFuture.m; sourceTree = "<group>"; };
 		BE2139CB97281A0747FD781E /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		BE2139EA5243B675C0BEDFED /* ASPDynamicDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASPDynamicDelegate.h; sourceTree = "<group>"; };
+		BE213A1AC4EEB72D2F5B1D3A /* UIAlertController+ASPDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+ASPDispatch.h"; sourceTree = "<group>"; };
 		BE213C021C69733C912CA4A8 /* ASPDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASPDispatch.h; sourceTree = "<group>"; };
 		BE213C35FB9DF93F2926275A /* ASPPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASPPromise.h; sourceTree = "<group>"; };
 		BE213C90F9B8A931B7741F3B /* UIAlertView+ASPDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+ASPDispatch.h"; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 				BE21334CC1E992914CF5AAE9 /* ASPDispatch.podspec */,
 				BE213CE8C186DEEE216A8EA3 /* ASPDispatch-UIKit */,
 				BE21300BF8AC44B07EF58B20 /* ASPDynamicDelegate */,
+				BE21305A8832CD65EC7947B6 /* .editorconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -190,6 +195,8 @@
 				BE213C90F9B8A931B7741F3B /* UIAlertView+ASPDispatch.h */,
 				BE213D6EB991CCC210CBC211 /* ASPDispatchUIKitHelpers.m */,
 				BE213E905D67B183C3D7471D /* ASPDispatchUIKitHelpers.h */,
+				BE213558C4EE3BDAA3AECF5C /* UIAlertController+ASPDispatch.m */,
+				BE213A1AC4EEB72D2F5B1D3A /* UIAlertController+ASPDispatch.h */,
 			);
 			path = "ASPDispatch-UIKit";
 			sourceTree = "<group>";
@@ -394,6 +401,7 @@
 				BE213C8ABE002CCFAD06F29D /* UIAlertView+ASPDispatch.m in Sources */,
 				BE213BAF4CBA13CA8F33220B /* ASPDynamicDelegate.m in Sources */,
 				BE21364467AA21A2EC08A374 /* ASPDispatchUIKitHelpers.m in Sources */,
+				BE213F08760444D41D50B3BF /* UIAlertController+ASPDispatch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

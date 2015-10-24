@@ -1,5 +1,5 @@
 //
-// Created by ASPCartman on 23/10/15.
+// Created by ASPCartman on 24/10/15.
 // Copyright (c) 2015 ASPCartman. All rights reserved.
 //
 
@@ -7,6 +7,6 @@
 
 @class ASPFuture;
 
-@interface UIAlertView (ASPDispatch)
+@interface UIAlertController (ASPDispatch)
 + (ASPFuture *) asp_showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray*)other;
 @end
