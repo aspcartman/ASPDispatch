@@ -64,8 +64,9 @@ static const char *ASPGetBlockSignature(struct ASPBlock *block)
 	{
 		Class newClass = objc_allocateClassPair([self class], [[NSString stringWithFormat:@"%@_%d_%d", [self class], classCounter, arc4random()] cStringUsingEncoding:NSUTF8StringEncoding], 0);
 		objc_registerClassPair(newClass);
-		[newClass alloc];
+		id object = [newClass alloc];
 		classCounter++;
+		return object;
 	}
 	return [self allocWithZone:nil];
 }

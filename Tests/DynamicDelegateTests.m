@@ -22,6 +22,9 @@
 SpecBegin(DynamicDelegate)
 	fdescribe(@"Delegate", ^{
 		ASPDynamicDelegate *d = [ASPDynamicDelegate delegate:^(ASPDynamicDelegate *delegate){ }];
+		it(@"Is not the same class", ^{
+			expect(d).toNot.beInstanceOf([ASPDynamicDelegate class]);
+		});
 		it(@"Adds an empty block", ^{
 			__block BOOL done = NO;
 			[d addMethodForSelector:@selector(dummy) withBlock:^{
