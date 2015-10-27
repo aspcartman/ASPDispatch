@@ -57,7 +57,7 @@ void ASPDispatchWait(BOOL (^completionCheck)())
 
 	while (!completionCheck())
 	{
-		CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.1, true);
+		CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.4, true);
 	}
 }
 
