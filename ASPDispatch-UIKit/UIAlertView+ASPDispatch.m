@@ -10,7 +10,7 @@
 #import "UIAlertController+ASPDispatch.h"
 
 @implementation UIAlertView (ASPDispatch)
-+ (ASPFuture *) asp_showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray *)other
++ (ASPFuture *) asp_showWithTitle:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray *)other
 {
 	if (ASPDispatchOSVersionIsBelow(@"8.0"))
 	{
@@ -45,7 +45,7 @@
 	}
 	else
 	{
-		return [UIAlertController asp_showAlertWithTitle:title message:message cancelButton:cancel otherButtons:other];
+		return [UIAlertController asp_showAlertWithStyle:UIAlertControllerStyleAlert title:title message:message cancelButton:cancel otherButtons:other];
 	}
 }
 @end

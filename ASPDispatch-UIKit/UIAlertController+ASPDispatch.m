@@ -8,10 +8,10 @@
 #import "ASPDispatchUIKitHelpers.h"
 
 @implementation UIAlertController (ASPDispatch)
-+ (ASPFuture *) asp_showAlertWithTitle:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray *)other
++ (ASPFuture *) asp_showAlertWithStyle:(UIAlertControllerStyle)style title:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray *)other
 {
 	return [ASPFuture inlineFuture:^(ASPPromise *p) {
-		UIAlertController *vc = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+		UIAlertController *vc = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:style];
 		[vc addAction:[UIAlertAction actionWithTitle:cancel ? : other ? NSLocalizedString(@"Cancel", nil) : NSLocalizedString(@"Dismiss", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
 			p.error = [[NSError alloc] initWithDomain:@"ASPDispatch" code:-1 userInfo:@{ NSLocalizedDescriptionKey : @"User canceled" }];
 		}]];

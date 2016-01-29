@@ -1,12 +1,12 @@
 //
-// Created by ASPCartman on 23/10/15.
-// Copyright (c) 2015 ASPCartman. All rights reserved.
+// Created by ASPCartman on 29/01/16.
+// Copyright (c) 2016 ASPCartman. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @class ASPFuture;
 
-@interface UIAlertView (ASPDispatch)
+@interface UIActionSheet (ASPDispatch)
 + (ASPFuture *) asp_showWithTitle:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray*)other;
 @end
