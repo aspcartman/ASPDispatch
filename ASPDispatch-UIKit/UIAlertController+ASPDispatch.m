@@ -8,7 +8,7 @@
 #import "ASPDispatchUIKitHelpers.h"
 
 @implementation UIAlertController (ASPDispatch)
-+ (ASPFuture *) asp_showAlertWithStyle:(UIAlertControllerStyle)style title:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray *)other
++ (ASPFuture *) asp_showWithStyle:(UIAlertControllerStyle)style title:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray *)other
 {
 	return [ASPFuture inlineFuture:^(ASPPromise *p) {
 		UIAlertController *vc = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:style];

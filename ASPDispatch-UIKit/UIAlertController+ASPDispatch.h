@@ -8,5 +8,5 @@
 @class ASPFuture;
 
 @interface UIAlertController (ASPDispatch)
-+ (ASPFuture *) asp_showAlertWithStyle:(UIAlertControllerStyle)style title:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray *)other;
++ (ASPFuture *) asp_showWithStyle:(UIAlertControllerStyle)style title:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray *)other;
 @end
