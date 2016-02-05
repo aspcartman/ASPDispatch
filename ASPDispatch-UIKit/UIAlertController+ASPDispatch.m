@@ -8,7 +8,7 @@
 #import "ASPDispatchUIKitHelpers.h"
 
 @implementation UIAlertController (ASPDispatch)
-+ (ASPFuture *) asp_showWithStyle:(UIAlertControllerStyle)style title:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray *)other
++ (ASPFuture *) asp_showWithStyle:(UIAlertControllerStyle)style fromView:(UIView *)view title:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray *)other
 {
 	return [ASPFuture inlineFuture:^(ASPPromise *p) {
 		UIAlertController *vc = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:style];
@@ -20,6 +20,12 @@
 				p.result = @(idx + 1);
 			}]];
 		}];
+
+		if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && style == UIAlertControllerStyleActionSheet )
+		{
+			vc.popoverPresentationController.sourceRect = [ASPDispatchCurrentViewController().view convertRect:view.frame fromView:view.superview];
+		}
+
 		[ASPDispatchCurrentViewController() presentViewController:vc animated:YES completion:nil];
 	}];
 }

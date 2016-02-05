@@ -56,7 +56,8 @@
 	}
 	else
 	{
-		return [UIAlertController asp_showWithStyle:UIAlertControllerStyleActionSheet title:title message:message cancelButton:cancel otherButtons:other];
+
+		return [UIAlertController asp_showWithStyle:UIAlertControllerStyleActionSheet fromView:view title:title message:message cancelButton:cancel otherButtons:other];
 	}
 	return nil;
 }
