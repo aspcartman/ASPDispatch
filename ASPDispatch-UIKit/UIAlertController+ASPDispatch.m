@@ -23,6 +23,7 @@
 
 		if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && style == UIAlertControllerStyleActionSheet )
 		{
+			vc.popoverPresentationController.sourceView = ASPDispatchCurrentViewController().view;
 			vc.popoverPresentationController.sourceRect = [ASPDispatchCurrentViewController().view convertRect:view.frame fromView:view.superview];
 		}
 
