@@ -8,5 +8,5 @@
 @class ASPFuture;
 
 @interface UIActionSheet (ASPDispatch)
-+ (ASPFuture *) asp_showWithTitle:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray*)other;
++ (ASPFuture *) asp_showFromView:(UIView*)view withTitle:(NSString *)title message:(NSString *)message cancelButton:(NSString *)cancel otherButtons:(NSArray*)other;
 @end
