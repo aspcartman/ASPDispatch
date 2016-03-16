@@ -16,7 +16,7 @@
 	{
 		return [ASPFuture inlineFuture:^(ASPPromise *p) {
 			// iOS 7 and below
-			ASPDynamicDelegate *d = [ASPDynamicDelegate new];
+			__block __strong ASPDynamicDelegate *d = [ASPDynamicDelegate new];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 			[d addMethodForSelector:@selector(alertView:clickedButtonAtIndex:) withBlock:^(id s, id ss, NSInteger index) {
@@ -28,6 +28,7 @@
 				{
 					p.error = [[NSError alloc] initWithDomain:@"ASPDispatch" code:-1 userInfo:@{ NSLocalizedDescriptionKey : @"User canceled" }];
 				}
+				d = nil;
 			}];
 #pragma clang diagnostic pop
 			UIAlertView   *view = [[UIAlertView alloc] initWithTitle:title

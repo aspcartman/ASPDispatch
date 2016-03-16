@@ -15,35 +15,35 @@
 	if (ASPDispatchOSVersionIsBelow(@"8.0"))
 	{
 		return [ASPFuture inlineFuture:^(ASPPromise *p) {
+			NSString *cancelTitle      = cancel ? : other ? NSLocalizedString(@"Cancel", nil) : NSLocalizedString(@"Dismiss", nil);
+
 			// iOS 7 and below
-			ASPDynamicDelegate     *d = [ASPDynamicDelegate new];
+			__block ASPDynamicDelegate     *d = [ASPDynamicDelegate new];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-			[d addMethodForSelector:@selector(actionSheet:didDismissWithButtonIndex:) withBlock:^(id s, id ss, NSInteger index) {
-				if (index)
+			[d addMethodForSelector:@selector(actionSheet:didDismissWithButtonIndex:) withBlock:^(id s, UIActionSheet * ss, NSInteger index) {
+				if (![[ss buttonTitleAtIndex:index] isEqualToString:cancelTitle])
 				{
-					p.result = @(index);
+					p.result = @([other indexOfObject:[ss buttonTitleAtIndex:index]]+1);
 				}
 				else
 				{
 					p.error = [[NSError alloc] initWithDomain:@"ASPDispatch" code:-1 userInfo:@{ NSLocalizedDescriptionKey : @"User canceled" }];
 				}
+				d = nil;
 			}];
 #pragma clang diagnostic pop
-			__unsafe_unretained id otherArgs[other.count];
-			[other getObjects:otherArgs];
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "LastArgumentMustBeNull"
+
 			UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
-			                                                         delegate:d
-			                                                cancelButtonTitle:cancel ? : other ? NSLocalizedString(@"Cancel", nil) : NSLocalizedString(@"Dismiss", nil)
+			                                                         delegate:(id <UIActionSheetDelegate>) d
+			                                                cancelButtonTitle:nil
 			                                           destructiveButtonTitle:nil
-			                                                otherButtonTitles:*otherArgs];
-#pragma clang diagnostic pop
+			                                                otherButtonTitles:nil];
 			for (NSString *otherButton in other)
 			{
 				[actionSheet addButtonWithTitle:otherButton];
 			}
+			[actionSheet setCancelButtonIndex:[actionSheet addButtonWithTitle:cancelTitle]];
 
 			UIView *rootView = [UIApplication sharedApplication].delegate.window.rootViewController.view;
 			if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )

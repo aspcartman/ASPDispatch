@@ -87,7 +87,7 @@ static const char *ASPGetBlockSignature(struct ASPBlock *block)
 
 - (void) dealloc
 {
-	objc_disposeClassPair([self class]);
+//	objc_disposeClassPair([self class]);
 }
 @end
 
